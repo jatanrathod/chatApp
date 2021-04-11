@@ -1,4 +1,4 @@
-![Landing Page](./images/landing.PNG)
+![Landing Page](./images/SignUp.PNG)
 
 # Getting Started with Chat Io App
 
