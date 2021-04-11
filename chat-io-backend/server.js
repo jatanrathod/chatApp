@@ -22,7 +22,7 @@ mongoose.connect(connection_uri, {
 
 // API Endpoints
 app.get("/", (req, res) => {
-  res.status(200).send("Hello Jatan Rathod");
+  res.status(200).send("Server is up and Running Successfully!!");
 });
 
 app.post("/addUser", (req, res) => {
@@ -36,8 +36,8 @@ app.post("/addUser", (req, res) => {
   });
 });
 
-app.get("/getUser", (req, res) => {
-  Users.find((err, data) => {
+app.get("/user/:userId", (req, res) => {
+  Users.find({ username: req.params.userId }, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {

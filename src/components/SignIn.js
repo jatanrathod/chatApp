@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import axios from "../axios.js";
 var querystring = require("querystring");
 
-function SignUp() {
+function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const inputEl = useRef(null);
@@ -18,24 +18,28 @@ function SignUp() {
     setUsername(username);
     setPassword(password);
     console.log(`${username} / ${password}`);
-    const userData = {
-      username: `${username}`,
-      password: `${password}`,
-      id: "",
-      timestamp: "",
-    };
-    async function insertData() {
-      const reqPost = await axios.post("/addUser", userData);
-    }
-    insertData();
-    history.push("/");
+    axios
+      .get(`/user/${username}`)
+      .then((res) => {
+        if (res.data[0].password === password) {
+          history.push("/rooms");
+        } else {
+          alert(`Invalid Username and password`);
+          setUsername("");
+          setPassword("");
+          inputEl.current.focus();
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
     <div className="h-screen flex bg-gray-bg1">
       <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-2xl py-10 px-16">
         <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">
-          Register with Chat IO
+          Log in to Chat IO
         </h1>
         <form onSubmit={handleSubmit}>
           <div>
@@ -73,21 +77,24 @@ function SignUp() {
               className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
             />
           </div>
+          {/* <Link to="/resetpass" className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-dark">
+            Forgot Password?
+          </Link> */}
           <div className="flex justify-center items-center mt-6">
             <button
               type="submit"
               value="Submit"
               className="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800"
             >
-              Sign Up
+              Sign In
             </button>
           </div>
         </form>
         <div className="text-center py-4">
           <p className="text-grey-dark text-sm">
-            Already a user account?{" "}
-            <Link to="/" className="no-underline text-blue font-bold">
-              Login
+            Don't have an account?{" "}
+            <Link to="/signup" className="no-underline text-blue font-bold">
+              Create an Account
             </Link>
           </p>
         </div>
@@ -96,4 +103,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignIn;
