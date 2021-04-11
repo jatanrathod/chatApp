@@ -2,16 +2,16 @@
 
 # Getting Started with Chat Io App
 
-This project is developed using MERN Stack
+Powering up Chat application with MERN Stack
 
 ## Client Side Frameworks
 
-ReactJS and tailwind css
+React and tailwind CSS
 
 ## Server Side Frameworks
 
 NodeJS
 
-## DataBase
+## Database
 
 MongoDB

@@ -4,7 +4,8 @@
 node_modules
 .pnp
 .pnp.js
-/bin/secrets.js
+chat-io-backend/bin/secrets.js
+chat-io-backend/node_modules
 
 # testing
 /coverage
