@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+import axios from "../axios.js";
+var querystring = require("querystring");
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -14,11 +16,21 @@ function SignUp() {
     setUsername(username);
     setPassword(password);
     console.log(`${username} / ${password}`);
+    const userData = {
+      username: `${username}`,
+      password: `${password}`,
+      id: "",
+      timestamp: "",
+    };
+    async function insertData() {
+      const reqPost = await axios.post("/addUser", userData);
+    }
+    insertData();
   };
 
   return (
     <div className="h-screen flex bg-gray-bg1">
-      <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
+      <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-2xl py-10 px-16">
         <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">
           Log in to Chat IO
         </h1>

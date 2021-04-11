@@ -1,10 +1,9 @@
 import SignUp from "./components/SignUp";
-import "./css/App.css";
 import "tailwindcss/tailwind.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <SignUp />
     </div>
   );
